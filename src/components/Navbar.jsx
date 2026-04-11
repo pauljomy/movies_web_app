@@ -31,15 +31,17 @@ const Navbar = ({
   return (
     <div className="sm:p-6 lg:p-0">
       <div
-        className={`bg-div-bg text-gray-400 px-6 py-4 flex max-lg:justify-between max-lg:items-center sm:rounded-md lg:flex-col  lg:min-h-screen lg:px-2 lg:gap-12 ${isSidebarOpen ? "w-55" : "lg:w-fit"}`}
+        className={`bg-div-bg text-gray-400 px-6 py-4 flex max-lg:justify-between max-lg:items-center sm:rounded-md lg:flex-col  lg:min-h-screen lg:px-2 lg:gap-12 ${isSidebarOpen ? "w-60" : "w-14"} border-r border-gray-700  transition-[width] duration-300 ease-in-out`}
       >
-        <div className={`flex items-center ${isSidebarOpen ? "gap-5" : ""}`}>
-          <img src={logo} alt="logo" className="w-6 sm:w-8" />
-          {isDesktop && isSidebarOpen && (
-            <span className="font-black text-gray-300">Movie Database</span>
-          )}
-        </div>
-        <div className="flex gap-4 max-lg:items-center md:gap-6 lg:gap-4 lg:flex-col">
+        <SideBarItem
+          icon={logo}
+          label="Movie Database"
+          alt="movie-database"
+          isSidebarOpen={isSidebarOpen}
+          className={`font-bold text-gray-100 text-[18px]`}
+          isDesktop={isDesktop}
+        />
+        <div className="flex gap-4 max-lg:items-center md:gap-6 lg:gap-4 lg:flex-col ">
           <SideBarItem
             icon={navHome}
             label="Home"
@@ -74,12 +76,21 @@ const Navbar = ({
           alt="avatar"
           className="w-6 md:w-8 border border-white rounded-full"
         />
-        {isDesktop && (
+        {isDesktop && !isSidebarOpen ? (
           <ChevronRight
             onClick={handleSidebarOpen}
             size={24}
-            className="flex-end  stroke-4 mt-auto hover:text-white"
+            className="h-7  stroke-4  hover:text-white"
           />
+        ) : (
+          <div className="flex gap-5 items-center text-xl ">
+            <ChevronRight
+              onClick={handleSidebarOpen}
+              size={24}
+              className="h-7 stroke-4  hover:text-white rotate-180 "
+            />
+            <span>Hide</span>
+          </div>
         )}
       </div>
     </div>
